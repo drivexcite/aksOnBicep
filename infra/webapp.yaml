@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: webapp
+  name: webapp
+  labels:
+    app: webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:      
+      containers:
+        - name: webapp
+          image: hackatonacr.azurecr.io/webapp/webapp:v1
+          resources:
+            limits:
+              cpu: "1"
+              memory: 1024Mi
+            requests:
+              cpu: 200m
+              memory: 128Mi
+          ports:
+          - containerPort: 80
